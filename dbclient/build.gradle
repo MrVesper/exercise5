@@ -1,0 +1,29 @@
+
+apply plugin: 'java'
+// In this section you declare where to find the dependencies of your project
+repositories {
+	 mavenCentral()
+}
+
+ext {
+    hsqldbVersion = "2.3.3"
+	log4jVersion = '2.5'
+    junitVersion = '4.12'
+	
+	libraries = [       
+        hsqldb: [
+                "org.hsqldb:hsqldb:${hsqldbVersion}"
+        ]
+	]
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.5'
+ 	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
+    compile libraries.hsqldb
+    testCompile 'junit:junit:4.12'
+}
+apply plugin: 'application'
+mainClassName = "dbClient.DbConnection"
+
